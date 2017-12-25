@@ -29,7 +29,7 @@ mkTeX
   -> String
 mkTeX Student{..} m a q = texTemplate
   where
-    questionsTeX = concatMap (\x -> "\\section{Question " ++ show x ++ "}\n") [1 .. q]
+    questionsTeX = concatMap (\x -> "\\section{Question " ++ show x ++ "}\n\\pagebreak\n") [1 .. q]
     texTemplate = [i|
 \\documentclass{article}
 \\renewcommand{\\familydefault}{\\sfdefault}
@@ -44,14 +44,28 @@ mkTeX Student{..} m a q = texTemplate
 \\usepackage{lastpage}
 \\usepackage{graphicx}
 
+\\begin{comment}
+  This gives us "Page x of k" as instructed at:
+  https://tex.stackexchange.com/questions/151989/add-page-number-with-total-page-number-on-each-page
+\\end{comment}
 \\fancyfoot[C]{Page \\thepage\\ of \\pageref{LastPage} / #{T.unpack fullName} (#{T.unpack studentId})}
 \\pagestyle{fancy}
+\\begin{comment}
+  This allows us to specify equation numbering on an ad-hoc basis.
+  From: https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
+\\end{comment}
+\\newcommand\\numberthis{\\addtocounter{equation}{1}\\tag{\\theequation}}
 
 \\begin{document}
 \\pagenumbering{gobble}
 \\maketitle
 \\newpage
 \\pagenumbering{arabic}
+\\begin{comment}
+  We want numbering to match the TMA format.
+  Some helpful info here:
+  https://tex.stackexchange.com/questions/3177/how-to-change-the-numbering-of-part-chapter-section-to-alphabetical-r
+\\end{comment}
 \\renewcommand{\\thesection}{}
 \\renewcommand\\thesubsection{\\alph{subsection})}
 \\renewcommand\\thesubsubsection{\\roman{subsubsection})}
