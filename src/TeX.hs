@@ -41,8 +41,9 @@ mkTeX Student{..} m a q = texTemplate
 \\usepackage{comment}
 \\usepackage{fancyhdr}
 \\usepackage{forest}
-\\usepackage{lastpage}
+\\usepackage{gensymb}
 \\usepackage{graphicx}
+\\usepackage{lastpage}
 
 \\begin{comment}
   This gives us "Page x of k" as instructed at:
