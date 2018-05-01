@@ -44,6 +44,7 @@ mkTeX Student{..} m a q = texTemplate
 \\usepackage{gensymb}
 \\usepackage{graphicx}
 \\usepackage{lastpage}
+\\usepackage{mathtools}
 
 \\begin{comment}
   This gives us "Page x of k" as instructed at:
@@ -56,7 +57,11 @@ mkTeX Student{..} m a q = texTemplate
   From: https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
 \\end{comment}
 \\newcommand\\numberthis{\\addtocounter{equation}{1}\\tag{\\theequation}}
-
+\\newcommand\\comb[2][^n]{\\prescript{#1\\mkern-0.5mu}{}C_{#2}}
+\\begin{comment}
+  Combinatorial notation
+  From: https://tex.stackexchange.com/questions/107125/is-there-a-command-to-write-the-form-of-a-combination-or-permutation
+\\end{comment}
 \\begin{document}
 \\pagenumbering{gobble}
 \\maketitle
