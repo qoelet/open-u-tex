@@ -45,6 +45,13 @@ mkTeX Student{..} m a q = texTemplate
 \\usepackage{graphicx}
 \\usepackage{lastpage}
 \\usepackage{mathtools}
+\\usepackage{tikz}
+
+\\begin{comment}
+  Additional tikz setup for drawing force diagrams
+  From: http://www.texample.net/tikz/examples/free-body-diagrams/
+\\end{comment}
+\\usetikzlibrary{scopes}
 
 \\begin{comment}
   This gives us "Page x of k" as instructed at:
