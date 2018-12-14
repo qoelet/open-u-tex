@@ -4,9 +4,10 @@
 
 module Main where
 
-import           WithCli
+import           Numeric.Natural (Natural)
+import           WithCli (Generic, HasArguments, withCli)
 
-import           TeX
+import           TeX (getStudentInfo, mkTeX)
 
 data CliArgs = CliArgs {
   moduleName :: String
@@ -21,5 +22,5 @@ main = withCli run
 run :: CliArgs -> IO ()
 run CliArgs{..} = do
   student <- getStudentInfo
-  let tex = mkTeX student moduleName assignment questions
+  let tex = mkTeX student moduleName assignment (fromIntegral questions)
   writeFile saveTo tex

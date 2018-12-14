@@ -8,7 +8,7 @@ module TeX where
 import           Data.String.Interpolate (i)
 import           Data.Text (Text)
 import qualified Data.Text as T
-import           Dhall (Generic, Interpret, auto, input)
+import           Dhall (Generic, Interpret, Natural, auto, input)
 
 data Student = Student {
   fullName :: Text
@@ -21,20 +21,19 @@ instance Interpret Student
 getStudentInfo :: IO Student
 getStudentInfo = input auto "./.student"
 
-mkTeX
-  :: Student
-  -> String
-  -> String
-  -> Int
-  -> String
-mkTeX Student{..} m a q = texTemplate
+mkTeX :: Student -> String -> String -> Natural -> String
+mkTeX Student{..} moduleName assignmentId questions
+  = texTemplate
   where
-    questionsTeX = concatMap (\x -> "\\section{Question " ++ show x ++ "}\n\\pagebreak\n") [1 .. q]
+    questionsTeX
+      = concatMap
+        (\x -> "\\section{Question " ++ show x ++ "}\n\\pagebreak\n")
+        [1 .. questions]
     texTemplate = [i|
 \\documentclass{article}
 \\renewcommand{\\familydefault}{\\sfdefault}
 
-\\title{#{m} #{a}}
+\\title{#{moduleName} #{assignmentId}}
 \\author{#{T.unpack fullName} (#{T.unpack studentId}) \\ #{T.unpack email}}
 
 \\usepackage{amsmath}
@@ -92,4 +91,4 @@ mkTeX Student{..} m a q = texTemplate
 #{questionsTeX}
 
 \\end{document}
-    |]
+|]
