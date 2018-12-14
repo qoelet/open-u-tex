@@ -1,6 +1,13 @@
 # open-u-tex
 
-A simple CLI for creating a TeX template for Open University assignments.
+A simple CLI for creating a LaTeX template for Open University assignments, including
+
+- numbering equations
+- cover page
+- page numbering
+- footer with student name and id
+
+See the generated `.tex` file for more details.
 
 ```shell
 $ stack install
