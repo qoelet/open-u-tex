@@ -4,7 +4,7 @@ packages:
 - '.'
 extra-deps:
 resolver: lts-12.22
-nix:
-  enable: true
-  packages:
-    - zlib
+#nix:
+#  enable: true
+#  packages:
+#    - zlib
