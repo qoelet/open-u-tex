@@ -30,6 +30,8 @@ mkTeX Student{..} moduleName assignmentId questions
         (\x -> "\\section{Question " ++ show x ++ "}\n\\pagebreak\n")
         [1 .. questions]
     texTemplate = [i|
+% Preamble
+
 \\documentclass{article}
 \\renewcommand{\\familydefault}{\\sfdefault}
 
@@ -45,6 +47,8 @@ mkTeX Student{..} moduleName assignmentId questions
 \\usepackage{lastpage}
 \\usepackage{mathtools}
 \\usepackage{tikz}
+
+% Additional features
 
 \\begin{comment}
   Additional tikz setup for drawing force diagrams
@@ -68,6 +72,9 @@ mkTeX Student{..} moduleName assignmentId questions
   Combinatorial notation
   From: https://tex.stackexchange.com/questions/107125/is-there-a-command-to-write-the-form-of-a-combination-or-permutation
 \\end{comment}
+
+% Body
+
 \\begin{document}
 \\pagenumbering{gobble}
 \\maketitle
